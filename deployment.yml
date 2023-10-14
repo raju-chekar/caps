@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: capstone
-        image: rajfast/cacapraj:latest
+        image: rajfast/capraj:latest
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 80
