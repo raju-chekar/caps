@@ -14,9 +14,8 @@ executors:
       DOCKER_IMAGE: rajfast/capraj:latest
     docker:
       - image: docker:stable
-
 jobs:
-  checklint:
+  checkcodelint:
     docker:
 # Use the same Docker base as the project
       - image: python:3.7.3-stretch
@@ -47,7 +46,7 @@ jobs:
           command: |
             . venv/bin/activate
               make lint 
-  build_push:
+  build_pushdock:
     executor: docker-publisher
     steps:
       - checkout
@@ -84,8 +83,8 @@ jobs:
 workflows:
   default:
     jobs:
-      - checklint
-      - build_push:
-          requires: [checklint]
+      - checkcodelint
+      - build_pushdock:
+          requires: [checkcodelint]
       - deploy:
-          requires: [build_push]
+          requires: [build_pushdock]
